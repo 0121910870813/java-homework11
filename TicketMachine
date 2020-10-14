@@ -1,0 +1,82 @@
+import java.util.Scanner;
+
+public class TicketMachine {
+    private int price;
+    private int balance;
+    private int total;
+
+    public TicketMachine(){
+        price = 2;
+        balance = 0;
+        total = 0;
+    }
+    public int getPrice(){
+        return price;
+    }
+    public int getBalance(){
+        return balance;
+    }
+    public int getTotal(){
+        return total;
+    }
+    public void insertMoney(int amount){
+        if (amount > 0){
+            balance += amount;
+            System.out.println("当前余额：" + balance);
+        }
+        else {
+            System.out.println("输入金额错误："+ amount);
+        }
+    }
+    public void printTicket(){
+        if (balance >= price){
+            System.out.println("===================");
+            System.out.println("This is a ticket");
+            System.out.println("price : 2 yuan");
+            System.out.println("===================");
+            balance -= price;
+            System.out.println("当前余额：" + balance + " 元");
+        }
+    }
+    public int refundBalance(){
+        int amountToRefund;
+        amountToRefund = balance;
+        balance = 0;
+        System.out.println("请收好找零 " + amountToRefund +" 元");
+        return amountToRefund;
+    }
+
+    public static void main(String[] args){
+        boolean a = true;
+        Scanner scan = new Scanner(System.in);
+        int choice;
+        TicketMachine T1 = new TicketMachine();
+
+        while (a){
+            System.out.println("===============欢迎使用自动售票机==============");
+            System.out.println("本机销售固定票价2元的车票");
+            while (a){
+                System.out.println("请选择服务...");
+                System.out.println("1、投币");
+                System.out.println("2、打印车票");
+                System.out.println("3、找零");
+                choice = scan.nextInt();
+                if (choice == 1){
+                    int money = scan.nextInt();
+                    T1.insertMoney(money);
+
+                }
+                else if (choice == 2){
+                    T1.printTicket();
+                }
+                else if (choice == 3){
+                    T1.refundBalance();
+                    break;
+                }
+
+            }
+
+        }
+
+    }
+}
